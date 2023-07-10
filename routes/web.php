@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
@@ -7,7 +8,8 @@ use App\Http\Controllers\CategoryCourseController;
 // use App\Http\Controllers\JabatansController;
 // use App\Http\Controllers\KaryawansController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseSectionController;
@@ -28,7 +30,15 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    if (Auth::check()) {
+        if (Auth::user()->role == 'admin')
+            return Redirect::route('admin.dashboard');
+        else
+            return Redirect::route('dashboard');
+    } else {
+        return Redirect::route('login');
+    }
 });
 
 // Route::get("/crud", [KaryawansController::class, "index"]);
@@ -92,13 +102,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth'])->group(function () {
-   
+
     // Protected dashboard route
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    
+
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     // // Other admin-only routes
 
