@@ -39,7 +39,9 @@
             <div class="mb-3">
                 <label for="course_sections_id" class="form-label">Course Section</label>
                 <select name="course_sections_id" class="form-control" required>
-                    <!-- Render the options for the course sections here -->
+                    @foreach ($courseSections as $courseSection)
+                        <option value="{{ $courseSection->id }}">{{ $courseSection->name }}</option>
+                    @endforeach
                 </select>
             </div>
 

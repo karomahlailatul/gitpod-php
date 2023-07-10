@@ -8,54 +8,6 @@ use Illuminate\Http\Request;
 
 class CourseSectionQnaController extends Controller
 {
-    // public function create(CourseSection $courseSection)
-    // {
-    //     return view('admin.course-section-qnas.create', compact('courseSection'));
-    // }
-
-    // public function store(Request $request, CourseSection $courseSection)
-    // {
-    //     // Validate and save the course section Q&A data
-    //     $validatedData = $request->validate([
-    //         'question' => 'required',
-    //         'answer' => 'required',
-    //         'description' => 'required',
-    //     ]);
-
-    //     $courseSectionQna = $courseSection->courseSectionQnas()->create($validatedData);
-
-    //     return redirect()->route('admin.course-sections.show', [$courseSection]);
-    // }
-
-    // public function show(CourseSection $courseSection, CourseSectionQna $courseSectionQna)
-    // {
-    //     return view('admin.course-section-qnas.show', compact('courseSection', 'courseSectionQna'));
-    // }
-
-    // public function edit(CourseSection $courseSection, CourseSectionQna $courseSectionQna)
-    // {
-    //     return view('admin.course-section-qnas.edit', compact('courseSection', 'courseSectionQna'));
-    // }
-
-    // public function update(Request $request, CourseSection $courseSection, CourseSectionQna $courseSectionQna)
-    // {
-    //     // Validate and update the course section Q&A data
-    //     $validatedData = $request->validate([
-    //         'question' => 'required',
-    //         'answer' => 'required',
-    //         'description' => 'required',
-    //     ]);
-
-    //     $courseSectionQna->update($validatedData);
-
-    //     return redirect()->route('admin.course-sections.show', [$courseSection]);
-    // }
-
-    // public function destroy(CourseSection $courseSection, CourseSectionQna $courseSectionQna)
-    // {
-    //     $courseSectionQna->delete();
-    //     return redirect()->route('admin.course-sections.show', [$courseSection]);
-    // }
     public function index()
     {
         $courseSectionQnas = CourseSectionQna::all();
@@ -64,7 +16,8 @@ class CourseSectionQnaController extends Controller
 
     public function create()
     {
-        return view('admin.course_section_qnas.create');
+        $courseSections = CourseSection::all();
+        return view('admin.course_section_qnas.create', compact('courseSections'));
     }
 
     public function store(Request $request)
@@ -88,7 +41,8 @@ class CourseSectionQnaController extends Controller
 
     public function edit(CourseSectionQna $courseSectionQna)
     {
-        return view('admin.course_section_qnas.edit', compact('courseSectionQna'));
+        $courseSections = CourseSection::all();
+        return view('admin.course_section_qnas.edit', compact('courseSectionQna', 'courseSections'));
     }
 
     public function update(Request $request, CourseSectionQna $courseSectionQna)

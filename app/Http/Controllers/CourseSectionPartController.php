@@ -8,54 +8,6 @@ use Illuminate\Http\Request;
 
 class CourseSectionPartController extends Controller
 {
-    // public function create(CourseSection $courseSection)
-    // {
-    //     return view('admin.course-section-parts.create', compact('courseSection'));
-    // }
-
-    // public function store(Request $request, CourseSection $courseSection)
-    // {
-    //     // Validate and save the course section part data
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|max:255',
-    //         'description' => 'required',
-    //     ]);
-
-    //     $courseSectionPart = $courseSection->courseSectionParts()->create($validatedData);
-
-    //     return redirect()->route('admin.course-sections.show', [$courseSection]);
-    // }
-
-    // public function show(CourseSection $courseSection, CourseSectionPart $courseSectionPart)
-    // {
-    //     return view('admin.course-section-parts.show', compact('courseSection', 'courseSectionPart'));
-    // }
-
-    // public function edit(CourseSection $courseSection, CourseSectionPart $courseSectionPart)
-    // {
-    //     return view('admin.course-section-parts.edit', compact('courseSection', 'courseSectionPart'));
-    // }
-
-    // public function update(Request $request, CourseSection $courseSection, CourseSectionPart $courseSectionPart)
-    // {
-    //     // Validate and update the course section part data
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|max:255',
-    //         'description' => 'required',
-    //     ]);
-
-    //     $courseSectionPart->update($validatedData);
-
-    //     return redirect()->route('admin.course-sections.show', [$courseSection]);
-    // }
-
-    // public function destroy(CourseSection $courseSection, CourseSectionPart $courseSectionPart)
-    // {
-    //     $courseSectionPart->delete();
-    //     return redirect()->route('admin.course-sections.show', [$courseSection]);
-    // }
-
-
     public function index()
     {
         $courseSectionParts = CourseSectionPart::all();
@@ -64,7 +16,8 @@ class CourseSectionPartController extends Controller
 
     public function create()
     {
-        return view('admin.course_section_parts.create');
+        $courseSections = CourseSection::all();
+        return view('admin.course_section_parts.create', compact('courseSections'));
     }
 
     public function store(Request $request)
@@ -87,7 +40,8 @@ class CourseSectionPartController extends Controller
 
     public function edit(CourseSectionPart $courseSectionPart)
     {
-        return view('admin.course_section_parts.edit', compact('courseSectionPart'));
+        $courseSections = CourseSection::all();
+        return view('admin.course_section_parts.edit', compact('courseSectionPart', 'courseSections'));
     }
 
     public function update(Request $request, CourseSectionPart $courseSectionPart)

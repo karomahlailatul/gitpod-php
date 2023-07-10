@@ -1,9 +1,13 @@
+
+
 @extends('layouts.main')
 
 @include('layouts.header')
 @include('layouts.footer')
 
 @section('title', 'Home')
+
+
 @section('content')
     <div class="container">
         <h1>Create Course</h1>
@@ -18,7 +22,8 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.courses.store') }}" method="POST">
+
+        <form action="{{ route('admin.courses.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
@@ -28,9 +33,9 @@
                 <label for="description">Description</label>
                 <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label for="image">Image</label>
-                <input type="text" name="image" id="image" class="form-control" required>
+                <input type="file" name="image" id="image" class="form-control-file" required>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
@@ -44,8 +49,8 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
-                <label for="active">Active</label>
+            <div class="form-group my-3">
+            <label for="active">Active</label>
                 <input type="checkbox" name="active" id="active" class="form-check-input" value="1" >
             </div>
             <button type="submit" class="btn btn-primary">Create</button>

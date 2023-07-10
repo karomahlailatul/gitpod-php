@@ -4,18 +4,24 @@
 @include('layouts.footer')
 
 @section('title', 'Home')
+
+
 @section('content')
     <div class="container">
         <h1>Courses</h1>
         <a href="{{ route('admin.courses.create') }}" class="btn btn-primary">Create Course</a>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 
-      
+
         <table class="table mt-3">
             <thead>
                 <tr>

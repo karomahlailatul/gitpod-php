@@ -6,7 +6,7 @@
 @section('title', 'Home')
 @section('content')
     <div class="container">
-        <h1 >Edit Course Section Part</h1>
+        <h1>Edit Course Section Part</h1>
         
         @if($errors->any())
             <div class="alert alert-danger">

@@ -1,9 +1,14 @@
+
+
+
 @extends('layouts.main')
 
 @include('layouts.header')
 @include('layouts.footer')
 
 @section('title', 'Home')
+
+
 @section('content')
     <div class="container">
         <h1>Edit Course</h1>
@@ -18,7 +23,8 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.courses.update', $course) }}" method="POST">
+
+        <form action="{{ route('admin.courses.update', $course) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -30,8 +36,8 @@
                 <textarea name="description" id="description" class="form-control" rows="4" required>{{ $course->description }}</textarea>
             </div>
             <div class="form-group">
-                <label for="image">Image</label>
-                <input type="text" name="image" id="image" class="form-control" value="{{ $course->image }}" required>
+                <label for="image my-3">Image</label>
+                <input type="file" name="image" id="image" class="form-control-file">
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
@@ -45,7 +51,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label for="active">Active</label>
                 <input type="checkbox" name="active" id="active" class="form-check-input" {{ $course->active ? 'checked' : '' }}>
             </div>

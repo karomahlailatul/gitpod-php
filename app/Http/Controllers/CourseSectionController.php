@@ -8,53 +8,6 @@ use Illuminate\Http\Request;
 
 class CourseSectionController extends Controller
 {
-    // public function create(Course $course)
-    // {
-    //     return view('admin.course-sections.create', compact('course'));
-    // }
-
-    // public function store(Request $request, Course $course)
-    // {
-    //     // Validate and save the course section data
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|max:255',
-    //         'description' => 'required',
-    //     ]);
-
-    //     $courseSection = $course->courseSections()->create($validatedData);
-
-    //     return redirect()->route('admin.courses.show', $course);
-    // }
-
-    // public function show(Course $course, CourseSection $courseSection)
-    // {
-    //     return view('admin.course-sections.show', compact('course', 'courseSection'));
-    // }
-
-    // public function edit(Course $course, CourseSection $courseSection)
-    // {
-    //     return view('admin.course-sections.edit', compact('course', 'courseSection'));
-    // }
-
-    // public function update(Request $request, Course $course, CourseSection $courseSection)
-    // {
-    //     // Validate and update the course section data
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|max:255',
-    //         'description' => 'required',
-    //     ]);
-
-    //     $courseSection->update($validatedData);
-
-    //     return redirect()->route('admin.courses.show', $course);
-    // }
-
-    // public function destroy(Course $course, CourseSection $courseSection)
-    // {
-    //     $courseSection->delete();
-    //     return redirect()->route('admin.courses.show', $course);
-    // }
-
     public function index()
     {
         $courseSections = CourseSection::all();
@@ -63,7 +16,8 @@ class CourseSectionController extends Controller
 
     public function create()
     {
-        return view('admin.course_sections.create');
+        $courses = Course::all();
+        return view('admin.course_sections.create', compact('courses'));
     }
 
     public function store(Request $request)
@@ -86,7 +40,8 @@ class CourseSectionController extends Controller
 
     public function edit(CourseSection $courseSection)
     {
-        return view('admin.course_sections.edit', compact('courseSection'));
+        $courses = Course::all();
+        return view('admin.course_sections.edit', compact('courseSection', 'courses'));
     }
 
     public function update(Request $request, CourseSection $courseSection)
